@@ -5,11 +5,12 @@ import {
   ListItem,
   ListItemText,
   Divider,
-  Collapse
+  Collapse,
+  Link
 } from "@material-ui/core";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
-import { Link } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 
 const drawerWidth = 240;
@@ -59,13 +60,13 @@ const Sidebar = () => {
         </ListItem>
         <Collapse in={open} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
-            <ListItem button>
-              <Link component={Link} to="/">
+            <ListItem>
+              <Link component={RouterLink} to="/">
                 Registration{" "}
               </Link>
             </ListItem>
-            <ListItem button>
-              <Link component={Link} to="/info">
+            <ListItem>
+              <Link component={RouterLink} to="/info">
                 Information{" "}
               </Link>
             </ListItem>
@@ -73,7 +74,7 @@ const Sidebar = () => {
         </Collapse>
         {["Visit", "Prescription", "Lab Test Order", "Drug"].map(
           (text, index) => (
-            <ListItem button key={text}>
+            <ListItem to="/" key={text}>
               <ListItemText primary={text} />
             </ListItem>
           )
