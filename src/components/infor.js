@@ -14,10 +14,11 @@ import FirstPageIcon from "@material-ui/icons/FirstPage";
 import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
 import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
 import LastPageIcon from "@material-ui/icons/LastPage";
-import faker from "faker";
-import MyModal from "../components/MyModal";
-import axios from "axios";
-
+import Button from "@material-ui/core/Button"
+//import SimpleModal from "./precriptionButton" ;
+import EditButton from "./editButton"
+import TextField from '@material-ui/core/TextField';
+import Input from '@material-ui/core/Input';
 const useStyles1 = makeStyles(theme => ({
   root: {
     flexShrink: 0,
@@ -96,42 +97,26 @@ TablePaginationActions.propTypes = {
   rowsPerPage: PropTypes.number.isRequired
 };
 
-const rows = [];
+function createData(patientId,precription , visitdate) {
+ 
+  return { patientId,precription ,visitdate};
+}
 
-const fakedata = () => {
-  for (let i = 1; i < 10; i++) {
-    let row = {
-      id: i,
-      firstName: faker.name.firstName(),
-      lastName: faker.name.lastName(),
-      mobile: faker.phone.phoneNumberFormat(),
-      gender: "Female",
-      dateOfBirth: "2019-01-01"
-    };
-    rows.push(row);
-  }
-};
-fakedata();
-
-const realRows = [];
-const baseURL = "https://";
-const getData = () => {
-  axios
-    .get(baseURL + "/students", {
-      headers: {
-        Authorization: "Basic aGVucnk6MTIzNA=="
-      }
-    })
-    .then(res => res.json())
-    .then(data => {
-      console.log(data);
-      data.forEach(x => {
-        realRows.push(x);
-      });
-    });
-};
-//khi nao chay server thi xoa comment duoi
-//getData()
+const rows = [
+  createData(123456, 305, "2019-01-01"),
+  createData(223456, 452, "2019-01-01"),
+  createData(323456, 262, "2019-01-01"),
+  createData(423456, 159, "2019-01-01"),
+  createData(523456, 356, "2019-01-01"),
+  createData(623456, 408, "2019-01-01"),
+  createData(546123, 237, "2019-01-01"),
+  createData(321456, 375, "2019-01-01"),
+  createData(656231, 518, "2019-01-01"),
+  createData(555123, 392, "2019-01-01"),
+  createData(662233, 318, "2019-01-01"),
+  createData(333356, 360, "2019-01-01"),
+  createData(545645, 437, "2019-01-01")
+]
 const useStyles2 = makeStyles(theme => ({
   root: {
     width: "100%",
@@ -145,10 +130,12 @@ const useStyles2 = makeStyles(theme => ({
   }
 }));
 
-export default function CustomPaginationActionsTable() {
+export default function
+ Infor() {
   const classes = useStyles2();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
+
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
@@ -163,37 +150,38 @@ export default function CustomPaginationActionsTable() {
 
   return (
     <Paper className={classes.root}>
+      <TextField
+
+      >
+
+      </TextField>
       <div className={classes.tableWrapper}>
         <Table className={classes.table}>
           <TableHead>
             <TableRow>
-              <TableCell>ID</TableCell>
-              <TableCell>First Name</TableCell>
-              <TableCell>Last Name</TableCell>
-              <TableCell>Mobile</TableCell>
-              <TableCell>Gender</TableCell>
-              <TableCell>Date Of Birth</TableCell>
-              <TableCell>Edit</TableCell>
+              <TableCell>Patient ID</TableCell>
+              <TableCell align="right">Precription</TableCell>
+              <TableCell align="right">Visit date</TableCell>
+              <TableCell align="right">Edit</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {rows
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map(row => (
-                <TableRow key={row.id}>
+                <TableRow key={row.patientId}>
                   <TableCell component="th" scope="row">
-                    {row.id}
+                    {row.patientId}
                   </TableCell>
-                  <TableCell>{row.firstName}</TableCell>
-                  <TableCell>{row.lastName}</TableCell>
-                  <TableCell>{row.mobile}</TableCell>
-                  <TableCell>{row.gender}</TableCell>
-                  <TableCell>{row.dateOfBirth}</TableCell>
-                  <TableCell>
-                    <MyModal data={row} />
-                  </TableCell>
+                  <TableCell align="right">{row.precription}</TableCell>
+                  <TableCell align="right">{row.visitdate}</TableCell>
+                <TableCell align="right">
+                <EditButton id={row.patientId}/>
+                <Button onClick={()=>{console.log(row.patientId)}}>Delete</Button>
+                </TableCell>
                 </TableRow>
               ))}
+
             {emptyRows > 0 && (
               <TableRow style={{ height: 48 * emptyRows }}>
                 <TableCell colSpan={6} />

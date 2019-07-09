@@ -38,6 +38,8 @@ const useStyles = makeStyles(theme => ({
 
 const Sidebar = () => {
   const [open, setOpen] = React.useState(false);
+  const [open1, setOpen1] = React.useState(false);
+
   const classes = useStyles();
 
   const handleClick = () => {
@@ -72,13 +74,49 @@ const Sidebar = () => {
             </ListItem>
           </List>
         </Collapse>
-        {["Visit", "Prescription", "Lab Test Order", "Drug"].map(
-          (text, index) => (
-            <ListItem to="/" key={text}>
-              <ListItemText primary={text} />
+        <ListItem
+          button
+          onClick={() => {
+            setOpen1(!open1);
+          }}
+        >
+          <ListItemText primary="Visit" />
+          {open1 ? <ExpandLess /> : <ExpandMore />}
+        </ListItem>
+        <Collapse in={open1} timeout="auto" unmountOnExit>
+          <List component="div" disablePadding>
+            <ListItem>
+              <Link component={RouterLink} to="/visit/addNew">
+                Visit Add new{" "}
+              </Link>
             </ListItem>
-          )
-        )}
+            <ListItem>
+              <Link component={RouterLink} to="/visit/addOld">
+                Visit Add old{" "}
+              </Link>
+            </ListItem>
+            <ListItem>
+              <Link component={RouterLink} to="/visit/info">
+                Visit info{" "}
+              </Link>
+            </ListItem>
+          </List>
+        </Collapse>
+        <ListItem>
+          <Link component={RouterLink} to="/visit/info">
+            Prescription{" "}
+          </Link>
+        </ListItem>
+        <ListItem>
+          <Link component={RouterLink} to="/visit/info">
+            Lab Test Order{" "}
+          </Link>
+        </ListItem>
+        <ListItem>
+          <Link component={RouterLink} to="/visit/info">
+            Drug{" "}
+          </Link>
+        </ListItem>
       </List>
       <Divider />
       <List>

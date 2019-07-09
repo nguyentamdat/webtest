@@ -1,5 +1,7 @@
+
 import React, { Component } from "react";
 import {
+  Input,
   Card,
   Typography,
   InputLabel,
@@ -9,34 +11,34 @@ import {
   TextField
 } from "@material-ui/core";
 
-export default class PatientForm extends Component {
+export default class CommonForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      firstName: {
-        value: props.data ? props.data.firstName : "",
+      ID : {
+        value: this.props.id ? this.props.id:  Math.floor(Math.random() * 1000000)  ,
         error: false
       },
-      lastName: {
-        value: props.data ? props.data.lastName : "",
+      lastname: {
+        value: "",
         error: false
       },
       mobile: {
-        value: props.data ? props.data.mobile : "",
+        value: "",
         error: false
       },
-      gender: props.data ? props.data.gender : "",
-      dob: props.data ? props.data.dateOfBirth : ""
+      date : ""
     };
     this.handleChange = this.handleChange.bind(this);
     this.checkValid = this.checkValid.bind(this);
   }
 
   handleChange(event) {
-    const { value, name } = event.target;
+    const { value, name, type } = event.target;
     if (name === "lastname" || name === "firstname" || name === "mobile") {
       let newState = { ...this.state[name] };
       newState.value = value;
+      console.log(newState);
       this.setState({ [name]: newState });
     } else this.setState({ [name]: value });
   }
@@ -81,64 +83,38 @@ export default class PatientForm extends Component {
           }}
         >
           <Typography gutterBottom variant="h5" component="h2">
-            Add Patient
+         {this.props.purpose}
           </Typography>
           <TextField
             style={{ margin: 5 }}
             fullWidth
-            label="First name"
+            label="ID"
             name="firstname"
-            value={this.state.firstName.value}
+            value={this.state.ID.value}
             onChange={this.handleChange}
             required
             onBlur={this.checkValid}
             type="text"
-            error={this.state.firstName.error}
+            error={this.state.ID.error}
           />
           <TextField
             style={{ margin: 5 }}
             fullWidth
-            label="Last name"
+            label="Precription"
             name="lastname"
-            value={this.state.lastName.value}
+            value={this.state.lastname.value}
             onChange={this.handleChange}
             required
             onBlur={this.checkValid}
             type="text"
-            error={this.state.lastName.error}
+            error={this.state.lastname.error}
           />
+
           <TextField
             style={{ margin: 5 }}
             fullWidth
-            label="Mobile"
-            name="mobile"
-            value={this.state.mobile.value}
-            onChange={this.handleChange}
-            required
-            onBlur={this.checkValid}
-            error={this.state.mobile.error}
-          />
-          <InputLabel style={{ alignSelf: "start", margin: 5 }}>
-            Gender
-          </InputLabel>
-          <Select
-            value={this.state.gender}
-            onChange={this.handleChange}
-            inputProps={{
-              name: "gender",
-              id: "gender"
-            }}
-            style={{ width: 700, margin: 5 }}
-          >
-            <MenuItem value="Male">Male</MenuItem>
-            <MenuItem value="Female">Female</MenuItem>
-            <MenuItem value="Other">Other</MenuItem>
-          </Select>
-          <TextField
-            style={{ margin: 5 }}
-            fullWidth
-            label="Date of Birth"
-            name="dob"
+            label="Date"
+            name="date"
             value={this.state.dob}
             onChange={this.handleChange}
             required
