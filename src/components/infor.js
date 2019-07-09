@@ -14,11 +14,10 @@ import FirstPageIcon from "@material-ui/icons/FirstPage";
 import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
 import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
 import LastPageIcon from "@material-ui/icons/LastPage";
-import Button from "@material-ui/core/Button"
+import Button from "@material-ui/core/Button";
 //import SimpleModal from "./precriptionButton" ;
-import EditButton from "./editButton"
-import TextField from '@material-ui/core/TextField';
-import Input from '@material-ui/core/Input';
+import EditButton from "./editButton";
+import Input from "@material-ui/core/Input";
 const useStyles1 = makeStyles(theme => ({
   root: {
     flexShrink: 0,
@@ -97,9 +96,8 @@ TablePaginationActions.propTypes = {
   rowsPerPage: PropTypes.number.isRequired
 };
 
-function createData(patientId,precription , visitdate) {
- 
-  return { patientId,precription ,visitdate};
+function createData(patientId, precription, visitdate) {
+  return { patientId, precription, visitdate };
 }
 
 const rows = [
@@ -116,7 +114,7 @@ const rows = [
   createData(662233, 318, "2019-01-01"),
   createData(333356, 360, "2019-01-01"),
   createData(545645, 437, "2019-01-01")
-]
+];
 const useStyles2 = makeStyles(theme => ({
   root: {
     width: "100%",
@@ -130,11 +128,11 @@ const useStyles2 = makeStyles(theme => ({
   }
 }));
 
-export default function
- Infor() {
+export default function Infor() {
   const classes = useStyles2();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [search, setSearch] = React.useState("");
 
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
@@ -150,11 +148,16 @@ export default function
 
   return (
     <Paper className={classes.root}>
-      <TextField
-
-      >
-
-      </TextField>
+      <Input
+        placeholder="Search"
+        fullWidth
+        name="search"
+        value={search}
+        onChange={event => setSearch(event.target.value)}
+        onKeyPress={event => {
+          if (event.keyCode === 13 || event.which === 13) alert(search);
+        }}
+      />
       <div className={classes.tableWrapper}>
         <Table className={classes.table}>
           <TableHead>
@@ -175,10 +178,16 @@ export default function
                   </TableCell>
                   <TableCell align="right">{row.precription}</TableCell>
                   <TableCell align="right">{row.visitdate}</TableCell>
-                <TableCell align="right">
-                <EditButton id={row.patientId}/>
-                <Button onClick={()=>{console.log(row.patientId)}}>Delete</Button>
-                </TableCell>
+                  <TableCell align="right">
+                    <EditButton id={row.patientId} />
+                    <Button
+                      onClick={() => {
+                        console.log(row.patientId);
+                      }}
+                    >
+                      Delete
+                    </Button>
+                  </TableCell>
                 </TableRow>
               ))}
 

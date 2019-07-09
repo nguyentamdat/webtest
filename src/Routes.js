@@ -5,10 +5,12 @@ import PatientForm from "./containers/PatientForm";
 import AddVisitNew from "./components/addVistNew";
 import Infor from "./components/infor";
 import AddOld from "./components/addVisitOld";
+import Signin from "./containers/Signin";
 const Routes = () => (
   <Switch>
-    <Route exact path="/" component={PatientForm} />
-    <Route path="/info" component={PatientTable} />
+    <Route exact path="/" component={Signin} />
+    <Route path="/patient/add" component={PatientForm} />
+    <Route path="/patient/info" component={PatientTable} />
     <Route path="/visit/info" component={Infor} />
     <Route path="/visit/addNew" component={AddVisitNew} />
     <Route path="/visit/addOld" component={AddOld} />

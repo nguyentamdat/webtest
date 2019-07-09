@@ -17,6 +17,7 @@ import LastPageIcon from "@material-ui/icons/LastPage";
 import faker from "faker";
 import MyModal from "../components/MyModal";
 import axios from "axios";
+import { Input } from "@material-ui/core";
 
 const useStyles1 = makeStyles(theme => ({
   root: {
@@ -151,6 +152,7 @@ export default function CustomPaginationActionsTable() {
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
+  const [search, setSearch] = React.useState("");
 
   function handleChangePage(event, newPage) {
     setPage(newPage);
@@ -164,6 +166,16 @@ export default function CustomPaginationActionsTable() {
   return (
     <Paper className={classes.root}>
       <div className={classes.tableWrapper}>
+        <Input
+          placeholder="Search"
+          fullWidth
+          name="search"
+          value={search}
+          onChange={event => setSearch(event.target.value)}
+          onKeyPress={event => {
+            if (event.keyCode === 13 || event.which === 13) alert(search);
+          }}
+        />
         <Table className={classes.table}>
           <TableHead>
             <TableRow>

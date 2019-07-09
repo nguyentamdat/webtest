@@ -1,22 +1,14 @@
-
 import React, { Component } from "react";
-import {
-  Input,
-  Card,
-  Typography,
-  InputLabel,
-  Button,
-  MenuItem,
-  Select,
-  TextField
-} from "@material-ui/core";
+import { Card, Typography, Button, TextField } from "@material-ui/core";
 
 export default class CommonForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      ID : {
-        value: this.props.id ? this.props.id:  Math.floor(Math.random() * 1000000)  ,
+      ID: {
+        value: this.props.id
+          ? this.props.id
+          : Math.floor(Math.random() * 1000000),
         error: false
       },
       lastname: {
@@ -27,14 +19,14 @@ export default class CommonForm extends Component {
         value: "",
         error: false
       },
-      date : ""
+      date: ""
     };
     this.handleChange = this.handleChange.bind(this);
     this.checkValid = this.checkValid.bind(this);
   }
 
   handleChange(event) {
-    const { value, name, type } = event.target;
+    const { value, name } = event.target;
     if (name === "lastname" || name === "firstname" || name === "mobile") {
       let newState = { ...this.state[name] };
       newState.value = value;
@@ -83,7 +75,7 @@ export default class CommonForm extends Component {
           }}
         >
           <Typography gutterBottom variant="h5" component="h2">
-         {this.props.purpose}
+            {this.props.purpose}
           </Typography>
           <TextField
             style={{ margin: 5 }}

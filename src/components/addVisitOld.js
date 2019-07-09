@@ -1,36 +1,26 @@
-
 import React, { Component } from "react";
-import {
-  Input,
-  Card,
-  Typography,
-  InputLabel,
-  Button,
-  MenuItem,
-  Select,
-  TextField
-} from "@material-ui/core";
+import { Card, Typography, Button, TextField } from "@material-ui/core";
 
 export default class AddOld extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      ID : {
-        value: this.props.id ,
+      ID: {
+        value: this.props.id,
         error: false
       },
       precription: {
         value: "",
         error: false
       },
-      date : ""
+      date: ""
     };
     this.handleChange = this.handleChange.bind(this);
     this.checkValid = this.checkValid.bind(this);
   }
 
   handleChange(event) {
-    const { value, name, type } = event.target;
+    const { value, name } = event.target;
     if (name === "lastname" || name === "firstname" || name === "mobile") {
       let newState = { ...this.state[name] };
       newState.value = value;
@@ -79,7 +69,7 @@ export default class AddOld extends Component {
           }}
         >
           <Typography gutterBottom variant="h5" component="h2">
-         Add visit
+            Add visit
           </Typography>
           <TextField
             style={{ margin: 5 }}
@@ -103,7 +93,7 @@ export default class AddOld extends Component {
             value={this.state.precription.value}
             onChange={this.handleChange}
             required
-           // onBlur={this.checkValid}
+            // onBlur={this.checkValid}
             type="text"
             error={this.state.precription.error}
           />

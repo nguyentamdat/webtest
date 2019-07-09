@@ -14,6 +14,7 @@ import FirstPageIcon from "@material-ui/icons/FirstPage";
 import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
 import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
 import LastPageIcon from "@material-ui/icons/LastPage";
+import { Input } from "@material-ui/core";
 
 const useStyles1 = makeStyles(theme => ({
   root: {
@@ -130,6 +131,7 @@ export default function CustomPaginationActionsTable() {
   const classes = useStyles2();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [search, setSearch] = React.useState("");
 
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
@@ -146,6 +148,16 @@ export default function CustomPaginationActionsTable() {
   return (
     <Paper className={classes.root}>
       <div className={classes.tableWrapper}>
+        <Input
+          placeholder="Search"
+          fullWidth
+          name="search"
+          value={search}
+          onChange={event => setSearch(event.target.value)}
+          onKeyPress={event => {
+            if (event.keyCode === 13 || event.which === 13) alert(search);
+          }}
+        />
         <Table className={classes.table}>
           <TableHead>
             <TableRow>
