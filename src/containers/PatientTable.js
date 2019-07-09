@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import TablePaging from "../components/TablePaging";
+import PatientTablePaging from "../components/PatientTablePaging";
 
-export default class PatientForm extends Component {
+export default class PatientTable extends Component {
   render() {
     return (
       <div style={{ flex: "auto" }}>
-        <TablePaging />
+        <PatientTablePaging />
       </div>
     );
   }

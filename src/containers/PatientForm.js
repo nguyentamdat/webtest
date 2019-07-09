@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import {
-  Input,
   Card,
   Typography,
   InputLabel,
@@ -13,6 +12,7 @@ import {
 export default class PatientForm extends Component {
   constructor(props) {
     super(props);
+    if (props) console.log(props);
     this.state = {
       firstname: {
         value: "",
@@ -34,11 +34,10 @@ export default class PatientForm extends Component {
   }
 
   handleChange(event) {
-    const { value, name, type } = event.target;
+    const { value, name } = event.target;
     if (name === "lastname" || name === "firstname" || name === "mobile") {
       let newState = { ...this.state[name] };
       newState.value = value;
-      console.log(newState);
       this.setState({ [name]: newState });
     } else this.setState({ [name]: value });
   }
